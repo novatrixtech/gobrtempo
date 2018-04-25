@@ -146,3 +146,38 @@ func TestTimeParaHoraFormatoBrasileiro(t *testing.T) {
 		})
 	}
 }
+
+func TestTimeParaDataHoraFormatoBrasileiro(t *testing.T) {
+	utc, _ := time.LoadLocation("America/Sao_Paulo")
+
+	type args struct {
+		tempo time.Time
+	}
+	tests := []struct {
+		name                        string
+		args                        args
+		wantDataEmFormatoBrasileiro string
+		wantErr                     bool
+	}{
+		{
+			name: "Tudo Ok",
+			args: args{
+				tempo: time.Date(1996, time.April, 15, 15, 04, 28, 0, utc),
+			},
+			wantDataEmFormatoBrasileiro: "15/04/1996 15:04:28",
+			wantErr:                     false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotDataEmFormatoBrasileiro, err := TimeParaDataHoraFormatoBrasileiro(tt.args.tempo)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("TimeParaDataHoraFormatoBrasileiro() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if gotDataEmFormatoBrasileiro != tt.wantDataEmFormatoBrasileiro {
+				t.Errorf("TimeParaDataHoraFormatoBrasileiro() = %v, want %v", gotDataEmFormatoBrasileiro, tt.wantDataEmFormatoBrasileiro)
+			}
+		})
+	}
+}
