@@ -90,6 +90,6 @@ func AgoraDataEHoraEmTime() (tempo time.Time) {
 //AgoraDataEHoraParaFormatoMySQL - obtem a data e hora atual do sistema no time-zone de SaoPaulo/Brasilia e retorna data e hora no formato MySQL
 func AgoraDataEHoraParaFormatoMySQL() (tempo string, err error) {
 	agora := time.Now().In(LocalizacaoBrasil)
-	tempo, err = TimeParaDataHoraFormatoMySQL(agora)
+	tempo = TimeParaDataHoraFormatoMySQL(agora)
 	return
 }
