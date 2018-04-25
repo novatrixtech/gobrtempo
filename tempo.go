@@ -55,13 +55,7 @@ func TimeParaDataHoraFormatoBrasileiro(tempo time.Time) (dataEmFormatoBrasileiro
 }
 
 //TimeParaDataHoraFormatoMySQL - de um time em Go para o formato MySQL (aaaa-mm-dd hh:mm:ss)
-func TimeParaDataHoraFormatoMySQL(tempo time.Time) (dataEmFormatoMySQL string, err error) {
-	dataEmFormatoMySQL = tempo.Format(FormatoMySQLData)
-	return
-}
-
-//TimeParaDataFormatoMySQL - de um time em Go para o formato MySQL (YYYY-MM-DD HH:SS:SS)
-func TimeParaDataFormatoMySQL(tempo time.Time) (dataEmFormatoMySQL string, err error) {
+func TimeParaDataHoraFormatoMySQL(tempo time.Time) (dataEmFormatoMySQL string) {
 	dataEmFormatoMySQL = tempo.Format(FormatoMySQLData)
 	return
 }
