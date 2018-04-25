@@ -41,3 +41,38 @@ func TestDataFormatoBrasileiroParaTime(t *testing.T) {
 		})
 	}
 }
+
+func TestDataFormatoMySQLParaTime(t *testing.T) {
+	utc, _ := time.LoadLocation("America/Sao_Paulo")
+
+	type args struct {
+		dataEmFormatoMySQL string
+	}
+	tests := []struct {
+		name      string
+		args      args
+		wantTempo time.Time
+		wantErr   bool
+	}{
+		{
+			name: "Tudo Ok",
+			args: args{
+				dataEmFormatoMySQL: "1996-04-15 00:00:00",
+			},
+			wantTempo: time.Date(1996, time.April, 15, 0, 0, 0, 0, utc),
+			wantErr:   false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotTempo, err := DataFormatoMySQLParaTime(tt.args.dataEmFormatoMySQL)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("DataFormatoMySQLParaTime() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(gotTempo, tt.wantTempo) {
+				t.Errorf("DataFormatoMySQLParaTime() = %v, want %v", gotTempo, tt.wantTempo)
+			}
+		})
+	}
+}
