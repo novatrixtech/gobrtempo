@@ -216,3 +216,39 @@ func TestTimeParaDataHoraFormatoMySQL(t *testing.T) {
 		})
 	}
 }
+
+// TODO: verificar se realmete a função deve ter esse comportamento pois esta igual a da TimeParaDataHoraFormatoMySQL
+func TestTimeParaDataFormatoMySQL(t *testing.T) {
+	utc, _ := time.LoadLocation("America/Sao_Paulo")
+
+	type args struct {
+		tempo time.Time
+	}
+	tests := []struct {
+		name                   string
+		args                   args
+		wantDataEmFormatoMySQL string
+		wantErr                bool
+	}{
+		{
+			name: "Tudo Ok",
+			args: args{
+				tempo: time.Date(1996, time.April, 15, 0, 0, 0, 0, utc),
+			},
+			wantDataEmFormatoMySQL: "1996-04-15 00:00:00",
+			wantErr:                false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotDataEmFormatoMySQL, err := TimeParaDataFormatoMySQL(tt.args.tempo)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("TimeParaDataFormatoMySQL() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if gotDataEmFormatoMySQL != tt.wantDataEmFormatoMySQL {
+				t.Errorf("TimeParaDataFormatoMySQL() = %v, want %v", gotDataEmFormatoMySQL, tt.wantDataEmFormatoMySQL)
+			}
+		})
+	}
+}
