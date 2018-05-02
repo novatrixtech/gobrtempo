@@ -93,3 +93,14 @@ func AgoraDataEHoraParaFormatoMySQL() (tempo string, err error) {
 	tempo = TimeParaDataHoraFormatoMySQL(agora)
 	return
 }
+
+//ConverteStringDataEmFormatoBrasileiroParaMySQL converte uma string de data 25/12/2010 para formato MySQL 2010-12-25
+func ConverteStringDataEmFormatoBrasileiroParaMySQL(data string) (dataSQL string, err error) {
+	err = nil
+	tmpData, err := DataFormatoBrasileiroParaTime(data)
+	if err != nil {
+		return
+	}
+	dataSQL = TimeParaDataHoraFormatoMySQL(tmpData)
+	return
+}
