@@ -13,8 +13,10 @@ const (
 	FormatoBrasileiroHora = "15:04:05"
 	//FormatoBrasileiroDataHora representa data e hora no formato mais popular no Brasil
 	FormatoBrasileiroDataHora = "02/01/2006 15:04:05"
-	//FormatoMySQLData representa data no formato padrão do MySQL
+	//FormatoMySQLData representa data e hora no formato padrão do MySQL
 	FormatoMySQLData = "2006-01-02 15:04:05"
+	//FormatoMySQLSomenteData representa data no formato padrão do MySQL
+	FormatoMySQLSomenteData = "2006-01-02"
 )
 
 func init() {
@@ -37,19 +39,19 @@ func DataFormatoMySQLParaTime(dataEmFormatoMySQL string) (tempo time.Time, err e
 }
 
 //TimeParaDataFormatoBrasileiro - de um time em Go para o formato brasileiro (dd/mm/aaaa)
-func TimeParaDataFormatoBrasileiro(tempo time.Time) (dataEmFormatoBrasileiro string, err error) {
+func TimeParaDataFormatoBrasileiro(tempo time.Time) (dataEmFormatoBrasileiro string) {
 	dataEmFormatoBrasileiro = tempo.Format(FormatoBrasileiroData)
 	return
 }
 
 //TimeParaHoraFormatoBrasileiro - de um time em Go para o formato brasileiro (dd/mm/aaaa)
-func TimeParaHoraFormatoBrasileiro(tempo time.Time) (horaEmFormatoBrasileiro string, err error) {
+func TimeParaHoraFormatoBrasileiro(tempo time.Time) (horaEmFormatoBrasileiro string) {
 	horaEmFormatoBrasileiro = tempo.Format(FormatoBrasileiroHora)
 	return
 }
 
 //TimeParaDataHoraFormatoBrasileiro - de um time em Go para o formato brasileiro (dd/mm/aaaa hh:mm:ss)
-func TimeParaDataHoraFormatoBrasileiro(tempo time.Time) (dataEmFormatoBrasileiro string, err error) {
+func TimeParaDataHoraFormatoBrasileiro(tempo time.Time) (dataEmFormatoBrasileiro string) {
 	dataEmFormatoBrasileiro = tempo.Format(FormatoBrasileiroDataHora)
 	return
 }
@@ -60,24 +62,30 @@ func TimeParaDataHoraFormatoMySQL(tempo time.Time) (dataEmFormatoMySQL string) {
 	return
 }
 
+//TimeParaDataFormatoMySQL - de um time em Go para o formato MySQL (aaaa-mm-dd)
+func TimeParaDataFormatoMySQL(tempo time.Time) (dataEmFormatoMySQL string) {
+	dataEmFormatoMySQL = tempo.Format(FormatoMySQLSomenteData)
+	return
+}
+
 //Agora - obtem a hora atual do sistema no time-zone de SaoPaulo/Brasilia e retorna a hora
-func Agora() (tempo string, err error) {
+func Agora() (tempo string) {
 	agora := time.Now().In(LocalizacaoBrasil)
-	tempo, err = TimeParaHoraFormatoBrasileiro(agora)
+	tempo = TimeParaHoraFormatoBrasileiro(agora)
 	return
 }
 
 //Hoje - obtem a data atual do sistema no time-zone de SaoPaulo/Brasilia e retorna a data
-func Hoje() (tempo string, err error) {
+func Hoje() (tempo string) {
 	agora := time.Now().In(LocalizacaoBrasil)
-	tempo, err = TimeParaDataFormatoBrasileiro(agora)
+	tempo = TimeParaDataFormatoBrasileiro(agora)
 	return
 }
 
 //AgoraDataEHora - obtem a data e hora atual do sistema no time-zone de SaoPaulo/Brasilia e retorna data e hora
-func AgoraDataEHora() (tempo string, err error) {
+func AgoraDataEHora() (tempo string) {
 	agora := time.Now().In(LocalizacaoBrasil)
-	tempo, err = TimeParaDataHoraFormatoBrasileiro(agora)
+	tempo = TimeParaDataHoraFormatoBrasileiro(agora)
 	return
 }
 

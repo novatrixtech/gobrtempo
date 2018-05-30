@@ -100,11 +100,7 @@ func TestTimeParaDataFormatoBrasileiro(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotDataEmFormatoBrasileiro, err := TimeParaDataFormatoBrasileiro(tt.args.tempo)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("TimeParaDataFormatoBrasileiro() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
+			gotDataEmFormatoBrasileiro := TimeParaDataFormatoBrasileiro(tt.args.tempo)
 			if gotDataEmFormatoBrasileiro != tt.wantDataEmFormatoBrasileiro {
 				t.Errorf("TimeParaDataFormatoBrasileiro() = %v, want %v", gotDataEmFormatoBrasileiro, tt.wantDataEmFormatoBrasileiro)
 			}
@@ -135,11 +131,7 @@ func TestTimeParaHoraFormatoBrasileiro(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotHoraEmFormatoBrasileiro, err := TimeParaHoraFormatoBrasileiro(tt.args.tempo)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("TimeParaHoraFormatoBrasileiro() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
+			gotHoraEmFormatoBrasileiro := TimeParaHoraFormatoBrasileiro(tt.args.tempo)
 			if gotHoraEmFormatoBrasileiro != tt.wantHoraEmFormatoBrasileiro {
 				t.Errorf("TimeParaHoraFormatoBrasileiro() = %v, want %v", gotHoraEmFormatoBrasileiro, tt.wantHoraEmFormatoBrasileiro)
 			}
@@ -170,11 +162,7 @@ func TestTimeParaDataHoraFormatoBrasileiro(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotDataEmFormatoBrasileiro, err := TimeParaDataHoraFormatoBrasileiro(tt.args.tempo)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("TimeParaDataHoraFormatoBrasileiro() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
+			gotDataEmFormatoBrasileiro := TimeParaDataHoraFormatoBrasileiro(tt.args.tempo)
 			if gotDataEmFormatoBrasileiro != tt.wantDataEmFormatoBrasileiro {
 				t.Errorf("TimeParaDataHoraFormatoBrasileiro() = %v, want %v", gotDataEmFormatoBrasileiro, tt.wantDataEmFormatoBrasileiro)
 			}
@@ -205,11 +193,7 @@ func TestTimeParaDataHoraFormatoMySQL(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotDataEmFormatoMySQL, err := TimeParaDataHoraFormatoMySQL(tt.args.tempo)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("TimeParaDataHoraFormatoMySQL() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
+			gotDataEmFormatoMySQL := TimeParaDataHoraFormatoMySQL(tt.args.tempo)
 			if gotDataEmFormatoMySQL != tt.wantDataEmFormatoMySQL {
 				t.Errorf("TimeParaDataHoraFormatoMySQL() = %v, want %v", gotDataEmFormatoMySQL, tt.wantDataEmFormatoMySQL)
 			}
@@ -241,11 +225,7 @@ func TestTimeParaDataFormatoMySQL(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotDataEmFormatoMySQL, err := TimeParaDataFormatoMySQL(tt.args.tempo)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("TimeParaDataFormatoMySQL() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
+			gotDataEmFormatoMySQL := TimeParaDataFormatoMySQL(tt.args.tempo)
 			if gotDataEmFormatoMySQL != tt.wantDataEmFormatoMySQL {
 				t.Errorf("TimeParaDataFormatoMySQL() = %v, want %v", gotDataEmFormatoMySQL, tt.wantDataEmFormatoMySQL)
 			}
