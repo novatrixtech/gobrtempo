@@ -201,7 +201,6 @@ func TestTimeParaDataHoraFormatoMySQL(t *testing.T) {
 	}
 }
 
-// TODO: verificar se realmete a função deve ter esse comportamento pois esta igual a da TimeParaDataHoraFormatoMySQL
 func TestTimeParaDataFormatoMySQL(t *testing.T) {
 	utc, _ := time.LoadLocation("America/Sao_Paulo")
 
@@ -219,7 +218,7 @@ func TestTimeParaDataFormatoMySQL(t *testing.T) {
 			args: args{
 				tempo: time.Date(1996, time.April, 15, 0, 0, 0, 0, utc),
 			},
-			wantDataEmFormatoMySQL: "1996-04-15 00:00:00",
+			wantDataEmFormatoMySQL: "1996-04-15",
 			wantErr:                false,
 		},
 	}
