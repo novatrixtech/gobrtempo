@@ -1,6 +1,9 @@
 package gobrtempo
 
-import "time"
+import (
+	"strings"
+	"time"
+)
 
 //LocalizacaoBrasil representa a localizacao para data da capital do Brasil (Brasilia = Sao_Paulo pelo banco de dados IANA Time Zone)
 //Detalhes: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -9,6 +12,8 @@ var LocalizacaoBrasil *time.Location
 const (
 	//FormatoBrasileiroData representa data no formato mais popular no Brasil
 	FormatoBrasileiroData = "02/01/2006"
+	//FormatoAmericanoData representa data no formato mais popular Americano
+	FormatoAmericanoData = "1/2/06"
 	//FormatoBrasileiroHora representa a hora no formato mais popular no Brasil
 	FormatoBrasileiroHora = "15:04:05"
 	//FormatoBrasileiroDataHora representa data e hora no formato mais popular no Brasil
@@ -26,6 +31,12 @@ func init() {
 //DataFormatoBrasileiroParaTime - de uma data em formato brasileiro (dd/mm/aaaa) para time do Go
 func DataFormatoBrasileiroParaTime(dataEmFormatoBrasileiro string) (tempo time.Time, err error) {
 	tempo, err = time.ParseInLocation(FormatoBrasileiroData, dataEmFormatoBrasileiro, LocalizacaoBrasil)
+	return
+}
+
+//DataFormatoAmericanoParaTime - de uma data em formato americano (mm/dd/aaaa) para time do Go
+func DataFormatoAmericanoParaTime(dataEmFormatoAmericano string) (tempo time.Time, err error) {
+	tempo, err = time.ParseInLocation(FormatoAmericanoData, dataEmFormatoAmericano, LocalizacaoBrasil)
 	return
 }
 
@@ -105,7 +116,26 @@ func AgoraDataEHoraParaFormatoMySQL() (tempo string, err error) {
 //ConverteStringDataEmFormatoBrasileiroParaMySQL converte uma string de data 25/12/2010 para formato MySQL 2010-12-25
 func ConverteStringDataEmFormatoBrasileiroParaMySQL(data string) (dataSQL string, err error) {
 	err = nil
+	if len(strings.TrimSpace(data)) < 6 {
+		dataSQL = ""
+		return
+	}
 	tmpData, err := DataFormatoBrasileiroParaTime(data)
+	if err != nil {
+		return
+	}
+	dataSQL = TimeParaDataHoraFormatoMySQL(tmpData)
+	return
+}
+
+//ConverteStringDataEmFormatoAmericanoParaMySQL converte uma string de data 6/28/2018 para formato MySQL 2018-06-28
+func ConverteStringDataEmFormatoAmericanoParaMySQL(data string) (dataSQL string, err error) {
+	err = nil
+	if len(strings.TrimSpace(data)) < 6 {
+		dataSQL = ""
+		return
+	}
+	tmpData, err := DataFormatoAmericanoParaTime(data)
 	if err != nil {
 		return
 	}
